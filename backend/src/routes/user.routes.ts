@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { User } from "../models/user.model";
+import jwt from "jsonwebtoken";
 const router = express.Router();
 
 router.post("/register", async (req: Request, res: Response) => {
@@ -11,10 +12,23 @@ router.post("/register", async (req: Request, res: Response) => {
 
     user = new User(req.body);
     await user.save();
-
-    return res.status(201).json({
-      message: "User successfully registered",
-    });
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET as string,
+      {
+        expiresIn: "1d",
+      }
+    );
+    return res
+      .status(201)
+      .cookie("auth_token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 1000 * 60 * 60 * 24, // 1 day
+      })
+      .json({
+        message: "User successfully registered",
+      });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -22,3 +36,5 @@ router.post("/register", async (req: Request, res: Response) => {
     });
   }
 });
+
+export default router;
