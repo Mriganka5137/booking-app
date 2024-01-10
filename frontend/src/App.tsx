@@ -5,7 +5,22 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout />} />
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <p>Home</p>
+            </Layout>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <Layout>
+              <p>Search</p>
+            </Layout>
+          }
+        />
       </Routes>
     </Router>
   );
