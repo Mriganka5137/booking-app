@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import * as apiClinet from "../services/api-client";
 import { useAppContext } from "../contexts/AppContext";
+import { useNavigate } from "react-router-dom";
 export interface RegisterForm {
   firstName: string;
   lastName: string;
@@ -12,7 +13,7 @@ export interface RegisterForm {
 
 const Register = () => {
   const { showToast } = useAppContext();
-
+  const navigate = useNavigate();
   const {
     register,
     watch,
@@ -27,6 +28,7 @@ const Register = () => {
         message: "Account created successfully",
         type: "success",
       });
+      navigate("/");
     },
     onError: (error: Error) => {
       showToast({
