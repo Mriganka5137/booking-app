@@ -7,7 +7,6 @@ import { UserSchema } from "../utils/validation";
 export const registerUser = async (req: Request, res: Response) => {
   try {
     const validation = UserSchema.safeParse(req.body);
-
     if (!validation.success) {
       return res.status(400).json({ message: validation.error.errors });
     }
