@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import * as apiClinet from "../services/api-client";
+import { useAppContext } from "../contexts/AppContext";
 export interface RegisterForm {
   firstName: string;
   lastName: string;
@@ -10,6 +11,8 @@ export interface RegisterForm {
 }
 
 const Register = () => {
+  const { showToast } = useAppContext();
+
   const {
     register,
     watch,
@@ -20,10 +23,16 @@ const Register = () => {
   const mutation = useMutation({
     mutationFn: apiClinet.registerUser,
     onSuccess: () => {
-      console.log("Registration successful");
+      showToast({
+        message: "Account created successfully",
+        type: "success",
+      });
     },
     onError: (error: Error) => {
-      console.log(error.message);
+      showToast({
+        message: error.message || "Sorry, something went wrong",
+        type: "error",
+      });
     },
   });
 
@@ -120,6 +129,7 @@ const Register = () => {
       </label>
       <span className="text-right">
         <button
+          disabled={mutation.isPending}
           className="px-3 py-2 text-lg font-medium text-white bg-blue-600 rounded-md hover:bg-primary"
           type="submit"
         >
