@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
-interface RegisterForm {
+import { useMutation } from "@tanstack/react-query";
+import * as apiClinet from "../services/api-client";
+export interface RegisterForm {
   firstName: string;
   lastName: string;
   email: string;
@@ -15,8 +17,18 @@ const Register = () => {
     formState: { errors },
   } = useForm<RegisterForm>();
 
+  const mutation = useMutation({
+    mutationFn: apiClinet.registerUser,
+    onSuccess: () => {
+      console.log("Registration successful");
+    },
+    onError: (error: Error) => {
+      console.log(error.message);
+    },
+  });
+
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    mutation.mutate(data);
   });
   return (
     <form className="flex flex-col gap-5 " onSubmit={onSubmit}>
