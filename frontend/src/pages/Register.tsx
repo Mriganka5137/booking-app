@@ -8,9 +8,18 @@ interface RegisterForm {
 }
 
 const Register = () => {
-  const { register } = useForm<RegisterForm>();
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterForm>();
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
   return (
-    <form className="flex flex-col gap-5 ">
+    <form className="flex flex-col gap-5 " onSubmit={onSubmit}>
       <h2 className="mb-5 text-5xl font-bold text-gray-700">
         Create an account
       </h2>
@@ -23,6 +32,11 @@ const Register = () => {
             className="form-input"
             {...register("firstName", { required: "First name is required" })}
           />
+          {errors.firstName && (
+            <span className="font-normal text-red-400 ">
+              {errors.firstName.message}
+            </span>
+          )}
         </label>
         <label className="label">
           Last name
@@ -32,6 +46,11 @@ const Register = () => {
             id="lastName"
             {...register("lastName", { required: "Last name is required" })}
           />
+          {errors.lastName && (
+            <span className="font-normal text-red-400 ">
+              {errors.lastName.message}
+            </span>
+          )}
         </label>
       </div>
       <label className="label">
@@ -41,6 +60,11 @@ const Register = () => {
           className=" form-input"
           {...register("email", { required: "This field is required" })}
         />
+        {errors.email && (
+          <span className="font-normal text-red-400 ">
+            {errors.email.message}
+          </span>
+        )}
       </label>
       <label className="label">
         Password
@@ -55,7 +79,41 @@ const Register = () => {
             },
           })}
         />
+        {errors.password && (
+          <span className="font-normal text-red-400 ">
+            {errors.password.message}
+          </span>
+        )}
       </label>
+      <label className="label">
+        Confirm password
+        <input
+          type="password"
+          className=" form-input"
+          {...register("confirmPassword", {
+            validate: (value) => {
+              if (!value) {
+                return "This field is required";
+              } else if (value !== watch("password")) {
+                return "Passwords do not match";
+              }
+            },
+          })}
+        />
+        {errors.confirmPassword && (
+          <span className="font-normal text-red-400 ">
+            {errors.confirmPassword.message}
+          </span>
+        )}
+      </label>
+      <span className="text-right">
+        <button
+          className="px-3 py-2 text-lg font-medium text-white bg-blue-600 rounded-md hover:bg-primary"
+          type="submit"
+        >
+          Create Account
+        </button>
+      </span>
     </form>
   );
 };
