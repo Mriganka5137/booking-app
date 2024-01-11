@@ -5,12 +5,15 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const axiosInstance = axios.create({
   baseURL: `${API_BASE_URL}/api/users`,
+  withCredentials: true,
 });
 
 export const registerUser = async (data: RegisterForm) => {
   try {
     const response: AxiosResponse<RegisterForm> =
-      await axiosInstance.post<RegisterForm>("/register", data);
+      await axiosInstance.post<RegisterForm>("/register", data, {
+        withCredentials: true,
+      });
     return response.data;
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
