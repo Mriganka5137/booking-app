@@ -15,3 +15,12 @@ body {
     --primary: 216, 100%, 29%;
   }
 }
+
+@layer components {
+  .label {
+    @apply flex-1 text-xl font-bold text-gray-600;
+  }
+  .form-input {
+    @apply w-full px-4 py-2 text-lg border rounded-md;
+  }
+}

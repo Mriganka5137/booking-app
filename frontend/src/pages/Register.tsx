@@ -11,25 +11,51 @@ const Register = () => {
   const { register } = useForm<RegisterForm>();
   return (
     <form className="flex flex-col gap-5 ">
-      <h2 className="text-3xl font-bold text-gray-700">Create an account</h2>
+      <h2 className="mb-5 text-5xl font-bold text-gray-700">
+        Create an account
+      </h2>
       <div className="flex gap-5 max-md:flex-col">
-        <label className="flex-1 text-xl font-bold text-gray-600">
+        <label className="label">
           First name
           <input
             type="text"
             id="firstName"
-            className="w-full px-4 py-2 text-lg border rounded-md"
+            className="form-input"
+            {...register("firstName", { required: "First name is required" })}
           />
         </label>
-        <label className="flex-1 text-xl font-bold text-gray-600">
+        <label className="label">
           Last name
           <input
             type="text"
-            className="w-full px-4 py-2 text-lg border rounded-md"
+            className="form-input"
             id="lastName"
+            {...register("lastName", { required: "Last name is required" })}
           />
         </label>
       </div>
+      <label className="label">
+        Email
+        <input
+          type="email"
+          className=" form-input"
+          {...register("email", { required: "This field is required" })}
+        />
+      </label>
+      <label className="label">
+        Password
+        <input
+          type="password"
+          className=" form-input"
+          {...register("password", {
+            required: "This field is required",
+            minLength: {
+              value: 8,
+              message: "Password must be at least 8 characters",
+            },
+          })}
+        />
+      </label>
     </form>
   );
 };
