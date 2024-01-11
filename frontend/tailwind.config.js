@@ -8,7 +8,11 @@ export default {
       },
     },
     container: {
-      padding: "8rem",
+      padding: {
+        DEFAULT: "1rem",
+        sm: "2rem",
+        md: "10rem",
+      },
     },
   },
   plugins: [],

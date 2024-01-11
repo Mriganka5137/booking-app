@@ -35,7 +35,7 @@ export const loginHandler = async (req: Request, res: Response) => {
         secure: process.env.NODE_ENV === "production",
       })
       .status(200)
-      .json({ message: "Login successful" });
+      .json({ userId: user._id, message: "Login successful" });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }
