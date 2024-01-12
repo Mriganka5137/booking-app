@@ -10,7 +10,7 @@ const Header = () => {
           <Link to="/">Booking.com</Link>
         </span>
         <span className="flex items-center gap-10 ">
-          {isLoggedIn && (
+          {isLoggedIn ? (
             <>
               <Link
                 to="/my-bookings"
@@ -24,14 +24,21 @@ const Header = () => {
               >
                 My Hotels
               </Link>
+              <Link
+                to="/sign-out"
+                className=" text-lg bg-white px-4 py-1.5 rounded-md hover:bg-gray-200 text-primary"
+              >
+                Sign Out
+              </Link>
             </>
+          ) : (
+            <Link
+              to="/sign-in"
+              className=" text-lg bg-white px-4 py-1.5 rounded-md hover:bg-gray-200 text-primary"
+            >
+              Sign In
+            </Link>
           )}
-          <Link
-            to="/sign-in"
-            className=" text-lg bg-white px-4 py-1.5 rounded-md hover:bg-gray-200 text-primary"
-          >
-            {isLoggedIn ? "Sign Out" : "Sign In"}
-          </Link>
         </span>
       </div>
     </div>

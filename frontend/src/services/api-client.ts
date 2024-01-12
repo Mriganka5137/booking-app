@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { RegisterForm } from "../pages/Register";
+import { SigninForm } from "../pages/Signin";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -35,6 +36,22 @@ export const validateToken = async () => {
       throw new Error(error.response.data.message);
     } else {
       throw new Error("An error occurred while registering the user.");
+    }
+  }
+};
+
+export const loginUser = async (data: SigninForm) => {
+  try {
+    const response = await axiosInstance.post("auth/login", data, {
+      withCredentials: true,
+    });
+
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error("An error occurred while signing in the user.");
     }
   }
 };
