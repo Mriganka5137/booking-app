@@ -44,7 +44,10 @@ const Register = () => {
     mutation.mutate(data);
   });
   return (
-    <form className="flex flex-col gap-8 " onSubmit={onSubmit}>
+    <form
+      className="flex flex-col gap-8 p-10 mb-20 border rounded-lg shadow-lg border-slate-100"
+      onSubmit={onSubmit}
+    >
       <h2 className="mb-5 text-5xl font-bold text-center text-gray-700">
         Create an account
       </h2>
