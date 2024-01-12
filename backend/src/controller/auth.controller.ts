@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { User } from "../models/user.model";
+import { User } from "../model/user.model";
 import { LoginSchema } from "../utils/validation";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -40,3 +40,5 @@ export const loginHandler = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+export const validateTokenHandler = async (req: Request, res: Response) => {};

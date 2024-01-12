@@ -2,9 +2,11 @@ import cors from "cors";
 import express, { Request, Response } from "express";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
+import cookieParser from "cookie-parser";
 
 export const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
