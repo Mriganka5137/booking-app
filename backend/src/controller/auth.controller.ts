@@ -4,6 +4,10 @@ import { LoginSchema } from "../utils/validation";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+export const validateTokenHandler = async (req: Request, res: Response) => {
+  return res.status(200).json({ userId: req.userId });
+};
+
 export const loginHandler = async (req: Request, res: Response) => {
   try {
     const validation = LoginSchema.safeParse(req.body);
@@ -41,6 +45,8 @@ export const loginHandler = async (req: Request, res: Response) => {
   }
 };
 
-export const validateTokenHandler = async (req: Request, res: Response) => {
-  return res.status(200).json({ userId: req.userId });
+export const logoutHandler = async (req: Request, res: Response) => {
+  return res.cookie("auth_token", "", {
+    expires: new Date(0),
+  });
 };
