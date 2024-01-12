@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
+import SignOutButton from "./SignOutButton";
+import SignInButton from "./SignInButton";
+import RegisterButton from "./RegisterButton";
 
 const Header = () => {
   const { isLoggedIn } = useAppContext();
@@ -24,27 +27,12 @@ const Header = () => {
               >
                 My Hotels
               </Link>
-              <Link
-                to="/sign-out"
-                className=" text-lg bg-white px-4 py-1.5 rounded-md hover:bg-gray-200 text-primary"
-              >
-                Sign Out
-              </Link>
+              <SignOutButton />
             </>
           ) : (
             <>
-              <Link
-                to="/sign-in"
-                className=" text-lg bg-white px-4 py-1.5 rounded-md hover:bg-gray-200 text-primary"
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/register"
-                className=" text-lg bg-white px-4 py-1.5 rounded-md hover:bg-gray-200 text-primary"
-              >
-                Register
-              </Link>
+              <SignInButton />
+              <RegisterButton />
             </>
           )}
         </span>
