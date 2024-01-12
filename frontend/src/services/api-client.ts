@@ -29,7 +29,6 @@ export const validateToken = async () => {
     const response = await axiosInstance.get("auth/validate-token", {
       withCredentials: true,
     });
-
     return response.data;
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
