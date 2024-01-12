@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import * as apiClinet from "../services/api-client";
 import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ export interface RegisterForm {
 }
 
 const Register = () => {
+  const queryClient = useQueryClient();
   const { showToast } = useAppContext();
   const navigate = useNavigate();
   const {
@@ -23,11 +24,12 @@ const Register = () => {
 
   const mutation = useMutation({
     mutationFn: apiClinet.registerUser,
-    onSuccess: () => {
+    onSuccess: async () => {
       showToast({
         message: "Account created successfully",
         type: "success",
       });
+      await queryClient.invalidateQueries({ queryKey: ["validateToken"] });
       navigate("/");
     },
     onError: (error: Error) => {

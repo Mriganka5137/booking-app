@@ -55,3 +55,18 @@ export const loginUser = async (data: SigninForm) => {
     }
   }
 };
+
+export const logoutUser = async () => {
+  try {
+    const response = await axiosInstance.post("auth/logout", null, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error("An error occurred while logging out the user.");
+    }
+  }
+};

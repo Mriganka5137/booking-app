@@ -46,7 +46,8 @@ export const loginHandler = async (req: Request, res: Response) => {
 };
 
 export const logoutHandler = async (req: Request, res: Response) => {
-  return res.cookie("auth_token", "", {
-    expires: new Date(0),
-  });
+  return res
+    .clearCookie("auth_token")
+    .status(200)
+    .json({ message: "Logout successful" });
 };
