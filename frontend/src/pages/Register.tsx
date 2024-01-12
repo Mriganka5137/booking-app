@@ -42,8 +42,8 @@ const Register = () => {
     mutation.mutate(data);
   });
   return (
-    <form className="flex flex-col gap-5 " onSubmit={onSubmit}>
-      <h2 className="mb-5 text-5xl font-bold text-gray-700">
+    <form className="flex flex-col gap-8 " onSubmit={onSubmit}>
+      <h2 className="mb-5 text-5xl font-bold text-center text-gray-700">
         Create an account
       </h2>
       <div className="flex gap-5 max-md:flex-col">

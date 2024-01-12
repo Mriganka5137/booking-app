@@ -9,7 +9,7 @@ const Header = () => {
         <span className="text-3xl font-bold tracking-tight text-white ">
           <Link to="/">Booking.com</Link>
         </span>
-        <span className="flex items-center gap-10 ">
+        <span className="flex items-center gap-5 ">
           {isLoggedIn ? (
             <>
               <Link
@@ -32,12 +32,20 @@ const Header = () => {
               </Link>
             </>
           ) : (
-            <Link
-              to="/sign-in"
-              className=" text-lg bg-white px-4 py-1.5 rounded-md hover:bg-gray-200 text-primary"
-            >
-              Sign In
-            </Link>
+            <>
+              <Link
+                to="/sign-in"
+                className=" text-lg bg-white px-4 py-1.5 rounded-md hover:bg-gray-200 text-primary"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/register"
+                className=" text-lg bg-white px-4 py-1.5 rounded-md hover:bg-gray-200 text-primary"
+              >
+                Register
+              </Link>
+            </>
           )}
         </span>
       </div>

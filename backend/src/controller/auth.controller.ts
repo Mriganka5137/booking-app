@@ -42,5 +42,5 @@ export const loginHandler = async (req: Request, res: Response) => {
 };
 
 export const validateTokenHandler = async (req: Request, res: Response) => {
-  return res.status(200).send({ userId: req.userId });
+  return res.status(200).json({ userId: req.userId });
 };

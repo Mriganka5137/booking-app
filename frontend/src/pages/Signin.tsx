@@ -26,7 +26,9 @@ const Signin = () => {
         message: "Logged in successfully",
         type: "success",
       });
-      navigate("/");
+      navigate("/", {
+        replace: true,
+      });
     },
     onError: (error: Error) => {
       showToast({
@@ -40,7 +42,9 @@ const Signin = () => {
 
   return (
     <form className="flex flex-col max-w-xl gap-8 mx-auto" onSubmit={onSubmit}>
-      <h2 className="mb-5 text-5xl font-bold text-gray-700">Sign in</h2>
+      <h2 className="mb-5 text-5xl font-bold text-center text-gray-700">
+        Sign in
+      </h2>
       <label className="label">
         Email
         <input
